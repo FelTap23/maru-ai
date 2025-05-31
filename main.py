@@ -2,7 +2,8 @@ from pypdf import PdfReader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_core.documents import BaseDocumentTransformer, Document
 from fastapi import FastAPI
-from choya.model.completion import CompletionRequest,CompletionResponse
+from choya.controller.sum_controller import router as sum_router
+from choya.controller.completion_controller import router as comp_router
 
 import logging
 logger = logging.getLogger("maru_ai_main")
@@ -31,14 +32,6 @@ def rag_logic_here():
 #Creation of the fast api object
 app = FastAPI()
 
+app.include_router(sum_router)
 
-@app.get("/")
-async def root():
-    return {
-        "message" : "Guoyootlot"
-    }
-
-@app.post("/completion", response_model=CompletionResponse)
-async def completion(body : CompletionRequest):
-    logger.info(f"Completion request received {body}")
-    return  CompletionResponse(output="Hi How can I help you")
+app.include_router(comp_router)
