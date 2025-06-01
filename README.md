@@ -5,7 +5,10 @@
 ##How to run the app 
 1. Activate the virtual environment
 2. pip install -r requirements.txt
-3. python -m uvicorn main:app --reload
+3. Run the app, just localhost
+    - python -m uvicorn main:app --reload
+    Support for ip
+    - python -m uvicorn main:app --host 0.0.0.0 --port 8000
 4. Check the hello world
 curl http://localhost:8000
 
